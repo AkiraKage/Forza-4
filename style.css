@@ -1,0 +1,68 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#log {
+    border: 1px solid;
+    height: 30vh;
+    width: 30vw;
+    margin: 20vh auto;
+}
+
+.input {
+    display: flex;
+    width: max-content;
+    margin: 5vh auto;
+    font-size: 17px;
+}
+
+input[type="text"] {
+    height: 20px;
+}
+
+input[type="submit"] {
+    width: 100px;
+    height: 35px;
+}
+
+#turn {
+    margin: solid 1px;
+}
+
+#playerturn {
+    text-align: center;
+    height: 5vh;
+    margin-top: 5vh;
+}
+
+#gametab {
+    height: 540px;
+    width: 630px;
+    background-color: blue;
+    border: 3px solid navy;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.box {
+    height: 78px;
+    width: 78px;
+    background-color: white;
+    border-radius: 50%;
+    border: 2px black solid;
+    margin: 4px;
+}
+
+.red {
+    background-color: red;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.highlight {
+    background-color: lightgray;
+    border: 2px solid dodgerblue;
+}
