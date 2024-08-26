@@ -50,6 +50,8 @@ input[type="submit"] {
     text-align: center;
     height: 5vh;
     margin-top: 5vh;
+    text-shadow: 1px 0 #000, -1px 0 #000, 0 1px #000, 0 -1px #000,
+    1px 1px #000, -1px -1px #000, 1px -1px #000, -1px 1px #000;
 }
 
 #gametab {
@@ -101,7 +103,7 @@ input[type="submit"] {
     20% { color: blue; }
     40% { color: orange; }
     60% { color: purple; }
-    80% { color: greenyellow; }
+    80% { color: rgb(36, 201, 36); }
     100% { color: red; }
 }
 

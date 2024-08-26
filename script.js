@@ -2,6 +2,7 @@ const parsedUrl = new URL(window.location.href);
 let red = parsedUrl.searchParams.get("player1");
 let yellow = parsedUrl.searchParams.get("player2");
 let currpl = red;
+let turnp = document.getElementById("playerturn");
 
 let registered = [];
 let stored = localStorage.getItem("forza4players");
@@ -52,7 +53,8 @@ function registerinJSON(name) {
 }
 
 function SetBoard() {
-    document.getElementById("playerturn").innerText = `È il turno di ${currpl}`;
+    turnp.innerText = `È il turno di ${currpl}`;
+    turnp.style.color = "red";
     for (let r = 0; r < rows; r++) {
         let row = [];
         for (let c = 0; c < cols; c++) {
@@ -104,8 +106,12 @@ function SetColor() {
         box.classList.add("yellow");
         currpl = red;
     }
-    document.getElementById("playerturn").innerText = `È il turno di ${currpl}`;
+    turnp.innerText = `È il turno di ${currpl}`;
 
+    if (currpl === red)
+        turnp.style.color = "red";
+    else turnp.style.color = "yellow";
+    
     r--;
     currColumns[c] = r;
 
@@ -166,13 +172,13 @@ function checkif4() {
     checkBlank();
 }
 
-function checkBlank(){
-    for(let i = 0; i < cols; i++)
-        if(jsboard[0][i] == " ") return;
+function checkBlank() {
+    for (let i = 0; i < cols; i++)
+        if (jsboard[0][i] == " ") return;
 
     gameon = false;
-    document.getElementById("playerturn").innerText = `Nessuna casella disponibile, gioco terminato`;
-    document.getElementById("playerturn").classList.add("nowinner");
+    turnp.innerText = `Nessuna casella disponibile, gioco terminato`;
+    turnp.classList.add("nowinner");
 }
 
 function gameEnd(r, c) {
@@ -182,8 +188,8 @@ function gameEnd(r, c) {
     else updateJSONstats(yellowindex, redindex);
 
     gameon = false;
-    document.getElementById("playerturn").innerText = `Il vincitore è ${winner}`;
-    document.getElementById("playerturn").classList.add("winner");
+    turnp.innerText = `Il vincitore è ${winner}`;
+    turnp.classList.add("winner");
 }
 
 function updateJSONstats(winnerindex, loserindex) {
