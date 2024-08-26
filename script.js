@@ -3,6 +3,9 @@ let red = parsedUrl.searchParams.get("player1");
 let yellow = parsedUrl.searchParams.get("player2");
 let currpl = red;
 
+let registered = [];
+let stored = localStorage.getItem("forza4players");
+let redindex, yellowindex;
 
 let gameon = true;
 let winner;
@@ -10,7 +13,43 @@ let jsboard = [];
 let rows = 6;
 let cols = 7;
 let currColumns = [5, 5, 5, 5, 5, 5, 5];
-window.onload = () => SetBoard();
+
+window.onload = () => { SetBoard(), retrieveJSON() };
+
+function retrieveJSON() {
+    if (stored) {
+        registered = JSON.parse(stored);
+        for (let i = 0; i < registered.length; i++) {
+            if (registered[i].name == red) redindex = i;
+            if (registered[i].name == yellow) yellowindex = i;
+        }
+        if (redindex == undefined) {
+            registerinJSON(red);
+            redindex = registered.length - 1;
+        }
+        if (yellowindex == undefined) {
+            registerinJSON(yellow);
+            yellowindex = registered.length - 1;
+        }
+
+    } else {
+        registerinJSON(red);
+        redindex = 0;
+        registerinJSON(yellow);
+        yellowindex = 1;
+    }
+}
+
+function registerinJSON(name) {
+    let player = {
+        "name": name,
+        "playedgames": 0,
+        "wins": 0,
+        "losses": 0
+    }
+    registered.push(player);
+    localStorage.setItem("forza4players", JSON.stringify(registered));
+}
 
 function SetBoard() {
     document.getElementById("playerturn").innerText = `È il turno di ${currpl}`;
@@ -81,8 +120,8 @@ function checkif4() {
             if (jsboard[r][c] != ' ') {
                 //horizontal -
                 if (c <= cols - 4 &&
-                    jsboard[r][c] == jsboard[r][c + 1] && 
-                    jsboard[r][c] == jsboard[r][c + 2] && 
+                    jsboard[r][c] == jsboard[r][c + 1] &&
+                    jsboard[r][c] == jsboard[r][c + 2] &&
                     jsboard[r][c] == jsboard[r][c + 3]) {
                     gameEnd(r, c);
                     return;
@@ -90,8 +129,8 @@ function checkif4() {
 
                 //vertical |
                 if (r <= rows - 4 &&
-                    jsboard[r][c] == jsboard[r + 1][c] && 
-                    jsboard[r][c] == jsboard[r + 2][c] && 
+                    jsboard[r][c] == jsboard[r + 1][c] &&
+                    jsboard[r][c] == jsboard[r + 2][c] &&
                     jsboard[r][c] == jsboard[r + 3][c]) {
                     gameEnd(r, c);
                     return;
@@ -105,17 +144,17 @@ function checkif4() {
         for (let c = 0; c < cols; c++) {
             if (jsboard[r][c] != ' ') {
                 //diagonal \
-                if (c <= cols - 4 && 
-                    jsboard[r][c] == jsboard[r + 1][c + 1] && 
-                    jsboard[r][c] == jsboard[r + 2][c + 2] && 
+                if (c <= cols - 4 &&
+                    jsboard[r][c] == jsboard[r + 1][c + 1] &&
+                    jsboard[r][c] == jsboard[r + 2][c + 2] &&
                     jsboard[r][c] == jsboard[r + 3][c + 3]) {
                     gameEnd(r, c);
                     return;
                 }
                 //antidiagonal /
-                if (c >= 3 && 
-                    jsboard[r][c] == jsboard[r + 1][c - 1] && 
-                    jsboard[r][c] == jsboard[r + 2][c - 2] && 
+                if (c >= 3 &&
+                    jsboard[r][c] == jsboard[r + 1][c - 1] &&
+                    jsboard[r][c] == jsboard[r + 2][c - 2] &&
                     jsboard[r][c] == jsboard[r + 3][c - 3]) {
                     gameEnd(r, c);
                     return;
@@ -127,6 +166,19 @@ function checkif4() {
 
 function gameEnd(r, c) {
     winner = jsboard[r][c];
+
+    if (winner == red) updateJSONstats(redindex, yellowindex);
+    else updateJSONstats(yellowindex, redindex);
+
     gameon = false;
     document.getElementById("playerturn").innerText = `Il vincitore è ${winner}`;
+}
+
+function updateJSONstats(winnerindex, loserindex) {
+    registered[winnerindex].wins += 1;
+    registered[loserindex].losses += 1;
+    registered[winnerindex].playedgames += 1;
+    registered[loserindex].playedgames += 1;
+
+    localStorage.setItem("forza4players", JSON.stringify(registered));
 }
