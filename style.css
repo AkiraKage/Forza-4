@@ -1,5 +1,6 @@
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: sans-serif;
+    background-color: gray;
 }
 
 #log {
@@ -7,22 +8,38 @@ body {
     height: 30vh;
     width: 30vw;
     margin: 20vh auto;
+    background-color: blue;
+    color: white;
+    border: 3px solid black;
+    border-radius: 10px;
 }
 
 .input {
-    display: flex;
     width: max-content;
     margin: 5vh auto;
-    font-size: 17px;
+    font-size: 18px;
+
+}
+
+p {
+    display: inline;
+    margin-right: 6px;
 }
 
 input[type="text"] {
+    font-family: sans-serif;
     height: 20px;
+    font-size: 15px;
 }
 
 input[type="submit"] {
+    display: flex;
     width: 100px;
     height: 35px;
+}
+
+#gamebody {
+    background-color: lightgrey;
 }
 
 #turn {
@@ -65,4 +82,42 @@ input[type="submit"] {
 .highlight {
     background-color: lightgray;
     border: 2px solid dodgerblue;
+}
+
+.winner {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px 20px;
+    width: max-content;
+    border: solid 2px black;
+    border-radius: 6px;
+    background-color: whitesmoke;
+    animation: color-change 4s ease-in-out infinite;
+}
+
+@keyframes color-change {
+    0% { color: red; }
+    20% { color: blue; }
+    40% { color: orange; }
+    60% { color: purple; }
+    80% { color: greenyellow; }
+    100% { color: red; }
+}
+
+.nowinner {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px 20px;
+    width: max-content;
+    border: solid 2px black;
+    border-radius: 6px;
+    background-color: whitesmoke;
+    animation: color-decrease 1s ease-in-out infinite;
+}
+
+@keyframes color-decrease {
+    0%, 100% { color: red; }
+    50% { color: black; }
 }

@@ -162,6 +162,17 @@ function checkif4() {
             }
         }
     }
+
+    checkBlank();
+}
+
+function checkBlank(){
+    for(let i = 0; i < cols; i++)
+        if(jsboard[0][i] == " ") return;
+
+    gameon = false;
+    document.getElementById("playerturn").innerText = `Nessuna casella disponibile, gioco terminato`;
+    document.getElementById("playerturn").classList.add("nowinner");
 }
 
 function gameEnd(r, c) {
@@ -172,6 +183,7 @@ function gameEnd(r, c) {
 
     gameon = false;
     document.getElementById("playerturn").innerText = `Il vincitore è ${winner}`;
+    document.getElementById("playerturn").classList.add("winner");
 }
 
 function updateJSONstats(winnerindex, loserindex) {
