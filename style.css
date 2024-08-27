@@ -101,8 +101,8 @@ input[type="submit"] {
 @keyframes color-change {
     0% { color: red; }
     20% { color: blue; }
-    40% { color: orange; }
-    60% { color: purple; }
+    40% { color: yellow; }
+    60% { color: magenta; }
     80% { color: rgb(36, 201, 36); }
     100% { color: red; }
 }
@@ -122,4 +122,35 @@ input[type="submit"] {
 @keyframes color-decrease {
     0%, 100% { color: red; }
     50% { color: black; }
+}
+
+#info {
+    border: 1px solid;
+    margin: 30px auto;
+    width: 640px;
+    height: 30px;
+    display: flex;
+}
+
+#infored, #infoyellow {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+
+#infored {
+    background-color: red;
+    color: white;
+}
+
+#infoyellow {
+    background-color: yellow;
+}
+
+.infop {
+    font-size: 16px;
+    text-align: center;
+    margin: 0;
+    font-weight: 600;
 }

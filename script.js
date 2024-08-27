@@ -15,7 +15,7 @@ let rows = 6;
 let cols = 7;
 let currColumns = [5, 5, 5, 5, 5, 5, 5];
 
-window.onload = () => { SetBoard(), retrieveJSON() };
+window.onload = () => { SetBoard(), retrieveJSON(), updateVisualStats() };
 
 function retrieveJSON() {
     if (stored) {
@@ -111,7 +111,7 @@ function SetColor() {
     if (currpl === red)
         turnp.style.color = "red";
     else turnp.style.color = "yellow";
-    
+
     r--;
     currColumns[c] = r;
 
@@ -190,6 +190,12 @@ function gameEnd(r, c) {
     gameon = false;
     turnp.innerText = `Il vincitore è ${winner}`;
     turnp.classList.add("winner");
+    updateVisualStats();
+}
+
+function updateVisualStats() {
+    document.getElementById("inforedp").innerText = `${red}:  ${registered[redindex].wins} vittorie,  ${registered[redindex].losses} sconfitte`;
+    document.getElementById("infoyellowp").innerText = `${yellow}:  ${registered[yellowindex].wins} vittorie, ${registered[yellowindex].losses} sconfitte`;
 }
 
 function updateJSONstats(winnerindex, loserindex) {
